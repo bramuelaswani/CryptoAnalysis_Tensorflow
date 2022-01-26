@@ -76,6 +76,7 @@ for x in range(prediction_days, len(model_inputs)):
 x_test = np.array(x_test)
 x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
 
+
 prediction_prices = model.predict(x_test)
 prediction_prices = scaler.inverse_transform(prediction_prices)
 
@@ -89,11 +90,13 @@ plt.show()
 
 
 # predict next_day
-real_data = [model_inputs[len(model_inputs)+1 -
+real_data = [model_inputs[len(model_inputs)+2 -
                           prediction_days:len(model_inputs)+1, 0]]
 real_data = np.array(real_data)
+#real_data = np.reshape(real_data, (real_data.shape[0], real_data.shape[1], 1))
+
 real_data = np.reshape(real_data, (real_data.shape[0], real_data.shape[1], 1))
-real_data = scaler.fit_transform(data["Close"].values.reshape(-1, 1))
+real_data = real_data.reshape(-1, 1)
 
 
 prediction = model.predict(real_data)
