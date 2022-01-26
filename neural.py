@@ -48,7 +48,7 @@ model.add(Dropout(0.2))
 model.add(Dense(units=1))
 
 model.compile(optimizer='adam', loss='mean_squared_error')
-model.fit(x_train, y_train, epochs=25, batch_size=32)
+model.fit(x_train, y_train, epochs=25, batch_size=32, verbose=2)
 
 
 # testing the model
@@ -93,6 +93,7 @@ real_data = [model_inputs[len(model_inputs)+1 -
                           prediction_days:len(model_inputs)+1, 0]]
 real_data = np.array(real_data)
 real_data = np.reshape(real_data, (real_data.shape[0], real_data.shape[1], 1))
+real_data = scaler.fit_transform(data["Close"].values.reshape(-1, 1))
 
 
 prediction = model.predict(real_data)
